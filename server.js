@@ -1,11 +1,16 @@
+// install required packages
 const express = require("express");
 const mongoose = require("mongoose");
 
+// sets up PORT
 const PORT = process.env.PORT || 3000;
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// use static files public
 app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
@@ -14,7 +19,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
 });
 
 // routes
-app.use(require("./public/js/api.js"));
+app.use(require("./routes/api-routes"));
+app.use(require("./routes/html-routes"));
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
