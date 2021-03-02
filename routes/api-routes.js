@@ -6,3 +6,5 @@ router.get("/api/workouts", (req, res) => {
     console.log(dbWorkout);
   });
 });
+
+module.exports = router;
