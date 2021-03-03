@@ -30,7 +30,7 @@ app.get("/api/workouts", (req, res) => {
 });
 
 // gets workouts in range
-app.get("/api/workout/range", (req, res) => {
+app.get("/api/workouts/range", (req, res) => {
   db.workout
     .find({})
     .then((dbWorkout) => {
