@@ -29,4 +29,19 @@ app.get("/api/workouts", (req, res) => {
   });
 });
 
+// add an exercise
+app.put("/api/workout/:id", (req, res) => {
+  db.Workout.findOneAndUpdate(
+    req.params.id,
+    { $push: { exercise: req.body } },
+    { new: true }
+  )
+    .then((found) => {
+      res.json(found);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
 module.exports = app;
