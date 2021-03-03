@@ -2,7 +2,7 @@ const db = require("../models");
 const app = require("express").Router();
 
 // creates the workout
-app.post("/api/workout", ({ body }, res) => {
+app.post("/api/workouts", ({ body }, res) => {
   // console.log("workout");
   db.workout
     .create(body)
@@ -29,8 +29,22 @@ app.get("/api/workouts", (req, res) => {
   });
 });
 
+// gets workouts in range
+app.get("/api/workout/range", (req, res) => {
+  db.workout
+    .find({})
+    .then((dbWorkout) => {
+      // console.log(dbWorkout);
+      res.json(dbWorkout);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
 // add an exercise
-app.put("/api/workout/:id", (req, res) => {
+app.put("/api/workouts/:id", (req, res) => {
+  console.log(req.params.id);
   db.Workout.findOneAndUpdate(
     req.params.id,
     { $push: { exercise: req.body } },
