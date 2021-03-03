@@ -1,11 +1,19 @@
 const db = require("../models");
-const router = require("express").Router();
+const app = require("express").Router();
 
-router.get("/api/workouts", (req, res) => {
-  console.log("hello");
-  // db.Workout.find({}).then((dbWorkout) => {
-  //   console.log(dbWorkout);
-  // });
+// gets the workout and totals the duration
+app.get("/api/workouts", (req, res) => {
+  db.Workout.find({}).then((dbWorkout) => {
+    // console.log(dbWorkout);
+    dbWorkout.forEach((workout) => {
+      let total = 0;
+      workout.exercise.forEach((e) => {
+        total += e.duration;
+      });
+
+      workout.totalDuration = total;
+    });
+  });
 });
 
-module.exports = router;
+module.exports = app;
