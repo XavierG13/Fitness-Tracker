@@ -7,4 +7,6 @@ router.get("/api/workouts", (req, res) => {
   });
 });
 
+
+
 module.exports = router;
